@@ -2,7 +2,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/constants.dart';
-import 'package:flutter_chat_app/main_screen/chat_list_screen.dart';
+import 'package:flutter_chat_app/main_screen/my_chats_screen.dart';
 import 'package:flutter_chat_app/main_screen/groups_screen.dart';
 import 'package:flutter_chat_app/main_screen/people_screen.dart';
 import 'package:flutter_chat_app/providers/authentication_provider.dart';
@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
 
   final List<Widget> pages = const [
-    ChatsListScreen(),
+    MyChatsScreen(),
     GroupsScreen(),
     PeopleScreen(),
   ];

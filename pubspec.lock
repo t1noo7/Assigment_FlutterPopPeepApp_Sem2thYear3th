@@ -312,6 +312,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.2.1"
+  grouped_list:
+    dependency: "direct main"
+    description:
+      name: grouped_list
+      sha256: fef106470186081c32636aa055492eee7fc7fe8bf0921a48d31ded24821af19f
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.1.2"
   http:
     dependency: transitive
     description:
@@ -733,6 +741,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  swipe_to:
+    dependency: "direct main"
+    description:
+      name: swipe_to
+      sha256: "58f61031803ece9b0efe09006809e78904c640c6d42d48715d1d1c3c28f8499a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.6"
   term_glyph:
     dependency: transitive
     description:
