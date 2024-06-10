@@ -15,6 +15,8 @@ class ContactMessageWidget extends StatelessWidget {
       message.timeSent,
       [hh, ':', nn, ' '],
     );
+    final isReplying = message.repliedTo.isNotEmpty;
+    final senderName = message.repliedTo == 'You' ? message.senderName : 'You';
     return SwipeTo(
       onRightSwipe: (details) {
         onRightSwipe();
@@ -37,9 +39,40 @@ class ContactMessageWidget extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(
                       left: 10.0, right: 30.0, top: 5.0, bottom: 20.0),
-                  child: Text(
-                    message.message,
-                    style: const TextStyle(color: Colors.black),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (isReplying) ...[
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey[400],
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  senderName,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  message.repliedMessage,
+                                  style: const TextStyle(color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                      Text(
+                        message.message,
+                        style: const TextStyle(color: Colors.black),
+                      ),
+                    ],
                   ),
                 ),
                 Positioned(

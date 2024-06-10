@@ -63,8 +63,8 @@ Future<File?> pickImage(
   return fileImage;
 }
 
-SizedBox buildDateTime(groupedByValue) {
-  return SizedBox(
+Center buildDateTime(groupedByValue) {
+  return Center(
     child: Card(
       elevation: 2,
       child: Padding(
