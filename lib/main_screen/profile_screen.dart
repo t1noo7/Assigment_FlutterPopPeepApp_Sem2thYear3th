@@ -227,47 +227,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               buildElevatedButton(
-                onPressed: () async {
-                  //show unfriend dialog to ask user if they are sure they want to unfriend
-                  // Create a dialog to confirm logout
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title:
-                          const Text('Unfriend', textAlign: TextAlign.center),
-                      content: Text(
-                          'Are you sure you want to unfriend ${userModel.name}?',
-                          textAlign: TextAlign.center),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () async {
-                            Navigator.pop(context);
-                            // Unfriend
-                            await context
-                                .read<AuthenticationProvider>()
-                                .unfriend(friendID: userModel.uid)
-                                .whenComplete(() {
-                              showSnackBar(
-                                  context, 'You are no longer friends');
-                            });
-                          },
-                          child: const Text('Yes'),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                label: 'Unfriend',
-                width: MediaQuery.of(context).size.width * 0.4,
-                backgroundColor: Theme.of(context).cardColor,
-                textColor: Colors.white,
-              ),
+                  onPressed: () async {
+                    //show unfriend dialog to ask user if they are sure they want to unfriend
+                    // Create a dialog to confirm logout
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title:
+                            const Text('Unfriend', textAlign: TextAlign.center),
+                        content: Text(
+                            'Are you sure you want to unfriend ${userModel.name}?',
+                            textAlign: TextAlign.center),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () async {
+                              Navigator.pop(context);
+                              // Unfriend
+                              await context
+                                  .read<AuthenticationProvider>()
+                                  .unfriend(friendID: userModel.uid)
+                                  .whenComplete(() {
+                                showSnackBar(
+                                    context, 'You are no longer friends');
+                              });
+                            },
+                            child: const Text('Yes'),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  label: 'Unfriend',
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  backgroundColor: Theme.of(context).cardColor,
+                  textColor: Theme.of(context).colorScheme.primary),
               buildElevatedButton(
                 onPressed: () async {
                   // Navigate to chat screen

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_chat_app/constants.dart';
 import 'package:flutter_chat_app/providers/chat_provider.dart';
+import 'package:flutter_chat_app/utilities/global_methods.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +15,8 @@ class MessageReplyPreview extends StatelessWidget {
       builder: (context, chatProvider, child) {
         final messageReply = chatProvider.messageReplyModel;
         final isMe = messageReply!.isMe;
+        final type = messageReply.messageType;
+
         return Container(
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor.withOpacity(0.2),
@@ -25,8 +29,7 @@ class MessageReplyPreview extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 12,
                 )),
-            subtitle: Text(messageReply.message,
-                maxLines: 1, overflow: TextOverflow.ellipsis),
+            subtitle: messageToShow(type: type, message: messageReply.message),
             trailing: IconButton(
               onPressed: () {
                 chatProvider.setMessageReplyModel(null);

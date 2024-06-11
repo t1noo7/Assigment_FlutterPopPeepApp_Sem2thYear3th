@@ -1,6 +1,8 @@
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/constants.dart';
 import 'package:flutter_chat_app/models/message_model.dart';
+import 'package:flutter_chat_app/widgets/display_message_type.dart';
 import 'package:swipe_to/swipe_to.dart';
 
 class ContactMessageWidget extends StatelessWidget {
@@ -13,7 +15,7 @@ class ContactMessageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final time = formatDate(
       message.timeSent,
-      [hh, ':', nn, ' '],
+      [hh, ':', nn, ' ', am],
     );
     final isReplying = message.repliedTo.isNotEmpty;
     final senderName = message.repliedTo == 'You' ? message.senderName : 'You';
@@ -37,8 +39,9 @@ class ContactMessageWidget extends StatelessWidget {
             child: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(
-                      left: 10.0, right: 30.0, top: 5.0, bottom: 20.0),
+                  padding: message.messageType == MessageEnum.text
+                      ? const EdgeInsets.fromLTRB(10.0, 5.0, 20.0, 20.0)
+                      : const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 25.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -59,19 +62,21 @@ class ContactMessageWidget extends StatelessWidget {
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                Text(
-                                  message.repliedMessage,
-                                  style: const TextStyle(color: Colors.black),
-                                ),
+                                DisplayMessageType(
+                                    message: message.repliedMessage,
+                                    type: message.messageType,
+                                    color: Colors.black,
+                                    maxLines: 1,
+                                    overFlow: TextOverflow.ellipsis),
                               ],
                             ),
                           ),
                         ),
                       ],
-                      Text(
-                        message.message,
-                        style: const TextStyle(color: Colors.black),
-                      ),
+                      DisplayMessageType(
+                          message: message.message,
+                          type: message.messageType,
+                          color: Colors.black),
                     ],
                   ),
                 ),

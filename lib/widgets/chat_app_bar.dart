@@ -6,6 +6,7 @@ import 'package:flutter_chat_app/providers/authentication_provider.dart';
 import 'package:flutter_chat_app/utilities/global_methods.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class ChatAppBar extends StatefulWidget {
   const ChatAppBar({super.key, required this.contactUID});
@@ -33,6 +34,8 @@ class _ChatAppBarState extends State<ChatAppBar> {
 
         final userModel =
             UserModel.fromMap(snapshot.data!.data() as Map<String, dynamic>);
+        DateTime lastSeen =
+            DateTime.fromMillisecondsSinceEpoch(int.parse(userModel.lastSeen));
 
         return Row(
           children: [
@@ -51,9 +54,14 @@ class _ChatAppBarState extends State<ChatAppBar> {
               children: [
                 Text(userModel.name, style: GoogleFonts.openSans(fontSize: 16)),
                 Text(
-                  'Online',
-                  // userModel.isOnline ? 'Online' : 'Last seen ${GlobalMethods.formatTimestamp(userModel.lastSeen)}',
-                  style: GoogleFonts.openSans(fontSize: 12),
+                  userModel.isOnline
+                      ? 'Online'
+                      : 'Last seen ${timeago.format(lastSeen)}',
+                  style: GoogleFonts.openSans(
+                      fontSize: 12,
+                      color: userModel.isOnline
+                          ? Colors.green
+                          : Colors.grey.shade600),
                 ),
               ],
             ),
